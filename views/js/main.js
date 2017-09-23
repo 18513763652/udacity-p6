@@ -446,10 +446,10 @@ var resizePizzas = function(size) {
 
   // 遍历披萨的元素并改变它们的宽度
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    var newwidth = (document.getElementByClassName(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+    for (var i = 0; i < document.getElementByClassName(".randomPizzaContainer").length; i++) {
+      var dx = determineDx(document.getElementByClassName(".randomPizzaContainer")[i], size);
+      document.getElementsByClassName(".randomPizzaContainer")[i].style.width = newwidth;
     }
   }
 
@@ -502,10 +502,11 @@ function updatePositions() {
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    transform:rotate;
   }
 
   // 再次使用User Timing API。这很值得学习
-  // 能够很容易地自定义测量维度
+  // 能够很容易地自定义测量维
   window.performance.mark("mark_end_frame");
   window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
   if (frame % 10 === 0) {
@@ -515,13 +516,16 @@ function updatePositions() {
 }
 
 // 在页面滚动时运行updatePositions函数
+requestanimationFrame(updatePositions);
 window.addEventListener('scroll', updatePositions);
 
 // 当页面加载时生成披萨滑窗
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
-  var s = 256;
-  for (var i = 0; i < 200; i++) {
+  var size = 256;
+  var rows = window.height / size;
+  var num = row * cols
+  for (var i = 0; i < num; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
