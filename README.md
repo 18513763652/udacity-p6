@@ -57,3 +57,22 @@
 * <a href="http://getbootstrap.com/components/">Bootstrap组件</a>
 
 
+<<<<<<< HEAD
+=======
+测试的方式：
+
+1.index.html 的优化
+压缩图片的方法: TinyPng35,
+异步加载 Google font34
+利用 media:none 不阻塞渲染地加载 CSS 方法31
+
+2.pizza 的滚动优化
+getelementById vs querySelector33
+tramsform36 代替 left 去移动pizza ，因为它不需要重新再绘制 pizza
+会导致重新布局的属性列表37
+用requestAnimationFrame优化Web动画36
+减少 pizza 个数，留意 : 以下的代码中的变量 s （size）为 pizza 大小的意思，即其边长为 256
+参考链接：
+https://discussions.youdaxue.com/t/topic/38793
+https://www.bilibili.com/video/av8893941/index_9.html#page=9
+>>>>>>> c37edf1ba63a332f3cdabf060d8d36fe5fd38628
