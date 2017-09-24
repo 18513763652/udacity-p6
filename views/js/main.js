@@ -447,12 +447,12 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     var pizzaContainers = document.getElementsByClassName("randomPizzaContainer");
     var dx = determineDx(pizzaContainers[0], size);
-      var newwidth = (document.getElementByClassName("randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-    for (var i = 0; i < pizzaContainers.length; i++) {
+  var newwidth = (pizzaContainers[0].offsetWidth + dx) + 'px';
+      for (var i = 0; i < pizzaContainers.length; i++) {
       pizzaContainers[i].style.width = newwidth;
     }
   }
-
+ changePizzaSizes(size)
   // User Timing API 太棒了
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
@@ -495,11 +495,13 @@ function logAverageFrame(times) {   // times参数是updatePositions()由User Ti
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
- var items = document.getElementByClassName('mover');
-  var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-  for (var i = 0; i < items.length; i++) {
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'p'
-  }
+var items = document.getElementsByClassName('mover');
+var scrollTop = (document.body.scrollTop / 1250);
+for (var i = 0; i < items.length; i++) {
+  var phase = Math.sin(scrollTop + (i % 5));
+  items[i].style.left = items[i].basicLeft + 100 * phase + 'px'
+}
+
   // 再次使用User Timing API。这很值得学习
   // 能够很容易地自定义测量维
   window.performance.mark("mark_end_frame");
@@ -525,8 +527,8 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * rows;
-    elem.style.top = (Math.floor(i / cols) * rows) + 'px';
+    elem.basicLeft = (i % cols) * size;
+    elem.style.top = (Math.floor(i / cols) * size) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
